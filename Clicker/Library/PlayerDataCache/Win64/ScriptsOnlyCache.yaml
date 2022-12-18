@@ -638,7 +638,7 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 7eb7e17fe7f35f27aee0f07416630ba3
+      Hash: 449319e08152f2635205046f08c42ee3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuControll

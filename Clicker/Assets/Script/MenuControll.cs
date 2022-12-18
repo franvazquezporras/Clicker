@@ -10,7 +10,7 @@ public class MenuControll : MonoBehaviour
     //Variables    
     [Header("Resolution")]
     [SerializeField] private Dropdown resolutionDropdown;
-    Resolution[] resolutions;
+    Resolution[] resolutions;    
     [SerializeField] private Toggle fullscreenCheck;
 
     [Header("Quality")]
@@ -29,7 +29,7 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     /*Funcion: Start                                                                                                                 */
     /*Desarrollador: Vazquez                                                                                                         */
-    /*Descripción: Obtiene las resoluciones posibles de la pantalla y el brillo guardado                                             */
+    /*Descripción: Obtiene las resoluciones posibles de la pantalla para generarlas en el dropbox de resoluciones sin que se repitan */
     /*********************************************************************************************************************************/
     private void Start()
     {
@@ -37,17 +37,13 @@ public class MenuControll : MonoBehaviour
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
-        
         for (int i = 0; i < resolutions.Length; i++)
-        {
-            
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
-
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
+        {            
+            string option = resolutions[i].width + " x " + resolutions[i].height;        
+            if(i>=2 && (resolutions[i].width != resolutions[i-1].width || resolutions[i].height != resolutions[i-1].height))
+                options.Add(option);
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)            
+                currentResolutionIndex = i;            
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
@@ -76,8 +72,7 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     public void SetMasterVolume(float volume)
     {
-        audioMixer.SetFloat("masterVolume", Mathf.Log10(volume) * 20);
-        
+        audioMixer.SetFloat("masterVolume", Mathf.Log10(volume) * 20);        
     }
 
     /*********************************************************************************************************************************/
@@ -88,9 +83,9 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("musicVolume", Mathf.Log10(volume) * 20);
-        
+        audioMixer.SetFloat("musicVolume", Mathf.Log10(volume) * 20);        
     }
+
     /*********************************************************************************************************************************/
     /*Funcion: SetSoundVolume                                                                                                        */
     /*Desarrollador: Vazquez                                                                                                         */
@@ -99,8 +94,7 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     public void SetSoundVolume(float volume)
     {
-        audioMixer.SetFloat("soundsVolume", Mathf.Log10(volume) * 20);
-        
+        audioMixer.SetFloat("soundsVolume", Mathf.Log10(volume) * 20);        
     }
 
     /*********************************************************************************************************************************/
@@ -114,7 +108,6 @@ public class MenuControll : MonoBehaviour
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-
     /*********************************************************************************************************************************/
     /*Funcion: SetFullScreen                                                                                                         */
     /*Desarrollador: Vazquez                                                                                                         */
@@ -125,7 +118,6 @@ public class MenuControll : MonoBehaviour
     {
         Screen.fullScreen = isFullscreen;
     }
-
 
     /*********************************************************************************************************************************/
     /*Funcion: SetBrightness                                                                                                         */
@@ -138,11 +130,23 @@ public class MenuControll : MonoBehaviour
         brightnessPanel.color = new Color(brightnessPanel.color.r, brightnessPanel.color.g, brightnessPanel.color.b, value);       
     }
 
-
+    /*********************************************************************************************************************************/
+    /*Funcion: ShowPanel                                                                                                             */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: showImage (panel a mostrar)                                                                             */
+    /*Descripción: Activa el objeto que recibe como parametro                                                                        */
+    /*********************************************************************************************************************************/
     public void ShowPanel(GameObject showImage)
     {
         showImage.gameObject.SetActive(true);
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Hide                                                                                                                  */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: hideImage (panel a ocultar)                                                                             */
+    /*Descripción: Desactiva el objeto que recibe como parametro                                                                     */
+    /*********************************************************************************************************************************/
     public void Hide(GameObject hideImage)
     {
         Animator anim = hideImage.GetComponent<Animator>();
@@ -150,17 +154,33 @@ public class MenuControll : MonoBehaviour
 
         StartCoroutine(HideObject(hideImage));
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: QuitGame                                                                                                              */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: quitPanel (panel a mostrar)                                                                             */
+    /*Descripción: Activa el panel de confirmar si se desea salir del juego                                                          */
+    /*********************************************************************************************************************************/
     public void QuitGame(GameObject quitPanel)
     {
         ShowPanel(quitPanel);
     }
 
-    
+    /*********************************************************************************************************************************/
+    /*Funcion: CloseGame                                                                                                             */
+    /*Desarrollador: Vazquez                                                                                                         */    
+    /*Descripción: Cierra la aplicacion por completo                                                                                 */
+    /*********************************************************************************************************************************/
     public void CloseGame()
     {
         Application.Quit();
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: LoadSetting                                                                                                           */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Carga los parametros guardados en playerpref y asigna los valores a los componentes de la UI                      */
+    /*********************************************************************************************************************************/
     private void LoadSetting()
     {
         if (PlayerPrefs.GetInt("fullScreen") == 1)
@@ -183,14 +203,31 @@ public class MenuControll : MonoBehaviour
 
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Deny                                                                                                                  */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Cancela los cambios realizados en el menu de opciones si no se han guardado previamente                           */
+    /*********************************************************************************************************************************/
     public void Deny()
     {
         LoadSetting();
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Accept                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Acepta los cambios realizados en el menu de opciones y los envia a guardar en los playerpref                      */
+    /*********************************************************************************************************************************/
     public void Accept()
     {
         SaveSetting();
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: SaveSetting                                                                                                           */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Guarda los valores de las opciones en los distintos playerpref                                                    */
+    /*********************************************************************************************************************************/
     private void SaveSetting()
     {
         if (fullscreenCheck.isOn)
@@ -204,6 +241,13 @@ public class MenuControll : MonoBehaviour
         PlayerPrefs.SetFloat("musicVolume", musicVolume.value);
         PlayerPrefs.SetFloat("soundVolume", soundVolume.value);
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: HideObject                                                                                                            */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: hideImage (objeto a desactivar)                                                                         */
+    /*Descripción: desactiva el objeto que recibe pasado un segundo                                                                  */
+    /*********************************************************************************************************************************/
     public IEnumerator HideObject(GameObject hideImage)
     {
         yield return new WaitForSeconds(1);      
