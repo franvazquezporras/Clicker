@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
@@ -242,6 +243,28 @@ public class MenuControll : MonoBehaviour
         PlayerPrefs.SetFloat("soundVolume", soundVolume.value);
     }
 
+
+    public void Resume(GameObject hideImage)
+    {
+        Time.timeScale = 1;
+        hideImage.transform.parent.gameObject.SetActive(false);
+        Hide(hideImage);
+        
+    }
+
+    public void Pause(GameObject showImage)
+    {
+        Time.timeScale = 0;      
+        ShowPanel(showImage);
+
+
+    }
+
+    public void LoadScene(string scene)
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(scene);
+    }
     /*********************************************************************************************************************************/
     /*Funcion: HideObject                                                                                                            */
     /*Desarrollador: Vazquez                                                                                                         */
@@ -250,7 +273,7 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     public IEnumerator HideObject(GameObject hideImage)
     {
-        yield return new WaitForSeconds(1);      
+        yield return new WaitForSecondsRealtime(1);      
         hideImage.SetActive(false);
     }
 }
