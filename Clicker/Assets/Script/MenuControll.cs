@@ -27,6 +27,7 @@ public class MenuControll : MonoBehaviour
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider soundVolume;
 
+    private bool update = false;
     /*********************************************************************************************************************************/
     /*Funcion: Start                                                                                                                 */
     /*Desarrollador: Vazquez                                                                                                         */
