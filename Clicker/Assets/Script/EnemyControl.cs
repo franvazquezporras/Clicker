@@ -13,7 +13,7 @@ public class EnemyControl : MonoBehaviour
     private void OnMouseDown()
     {
         anim.SetBool("Hit", true);
-        Debug.Log("hIT");
+        
     }
     private void OnMouseUp()
     {

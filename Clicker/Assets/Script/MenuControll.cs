@@ -247,8 +247,7 @@ public class MenuControll : MonoBehaviour
 
     public void Resume(GameObject hideImage)
     {
-        Time.timeScale = 1;
-        hideImage.transform.parent.gameObject.SetActive(false);
+        Time.timeScale = 1;        
         Hide(hideImage);
         
     }
