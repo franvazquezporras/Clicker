@@ -50,6 +50,7 @@ public class MenuControll : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+        LoadOptionsUI();
         LoadSetting();
     }   
 
@@ -181,28 +182,35 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     /*Funcion: LoadSetting                                                                                                           */
     /*Desarrollador: Vazquez                                                                                                         */
-    /*Descripción: Carga los parametros guardados en playerpref y asigna los valores a los componentes de la UI                      */
+    /*Descripción: Carga los parametros guardados y asigna los valores a los componentes de la UI                                    */
     /*********************************************************************************************************************************/
     private void LoadSetting()
+    {       
+        SetFullScreen(fullscreenCheck.isOn);        
+        SetQuality(qualityDropdown.value);        
+        SetResolution(resolutionDropdown.value);        
+        brightnessPanel.color = new Color(brightnessPanel.color.r, brightnessPanel.color.g, brightnessPanel.color.b, brightnessSlider.value);        
+        SetMasterVolume(masterVolume.value);        
+        SetMusicVolume(musicVolume.value);        
+        SetSoundVolume(soundVolume.value);
+    }
+    /*********************************************************************************************************************************/
+    /*Funcion: LoadOptionsUI                                                                                                         */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Carga los parametros guardados en playerpref                                                                      */
+    /*********************************************************************************************************************************/
+    public void LoadOptionsUI()
     {
         if (PlayerPrefs.GetInt("fullScreen") == 1)
             fullscreenCheck.isOn = true;
         else
             fullscreenCheck.isOn = false;
-        SetFullScreen(fullscreenCheck.isOn);
         qualityDropdown.value = PlayerPrefs.GetInt("quality", 0);
-        SetQuality(qualityDropdown.value);
         resolutionDropdown.value = PlayerPrefs.GetInt("resolution", 0);
-        SetResolution(resolutionDropdown.value);
         brightnessSlider.value = PlayerPrefs.GetFloat("Brightness", 0f);
-        brightnessPanel.color = new Color(brightnessPanel.color.r, brightnessPanel.color.g, brightnessPanel.color.b, brightnessSlider.value);
         masterVolume.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
-        SetMasterVolume(masterVolume.value);
         musicVolume.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-        SetMusicVolume(musicVolume.value);
         soundVolume.value = PlayerPrefs.GetFloat("soundVolume", 0.5f);
-        SetSoundVolume(soundVolume.value);
-
     }
 
     /*********************************************************************************************************************************/
@@ -213,6 +221,7 @@ public class MenuControll : MonoBehaviour
     public void Deny()
     {
         LoadSetting();
+        LoadOptionsUI();
     }
 
     /*********************************************************************************************************************************/
@@ -244,14 +253,24 @@ public class MenuControll : MonoBehaviour
         PlayerPrefs.SetFloat("soundVolume", soundVolume.value);
     }
 
-
+    /*********************************************************************************************************************************/
+    /*Funcion: Resume                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: hideImage (panel de pausa)                                                                              */
+    /*Descripción: Activa el tiempo de juego y oculta el panel de pausa                                                              */
+    /*********************************************************************************************************************************/
     public void Resume(GameObject hideImage)
     {
         Time.timeScale = 1;        
         Hide(hideImage);
         
     }
-
+    /*********************************************************************************************************************************/
+    /*Funcion: Resume                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: showImage (panel de pausa)                                                                              */
+    /*Descripción: Desactiva del tiempo de juego y acitiva el panel de pausa                                                         */
+    /*********************************************************************************************************************************/
     public void Pause(GameObject showImage)
     {
         Time.timeScale = 0;      
@@ -259,7 +278,12 @@ public class MenuControll : MonoBehaviour
 
 
     }
-
+    /*********************************************************************************************************************************/
+    /*Funcion: Resume                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: scene (escena a cargar)                                                                                 */
+    /*Descripción: Carga la escena que recibe como parametro                                                                         */
+    /*********************************************************************************************************************************/
     public void LoadScene(string scene)
     {
         Time.timeScale = 1;
@@ -276,4 +300,5 @@ public class MenuControll : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);      
         hideImage.SetActive(false);
     }
+    
 }

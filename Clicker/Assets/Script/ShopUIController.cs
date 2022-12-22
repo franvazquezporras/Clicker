@@ -40,7 +40,7 @@ public class ShopUIController : MonoBehaviour
         {
             gm.SetBasicDamage(1);
             priceBasicAttack += 5;
-            gm.SetLessPlayerCoin(priceBasicAttack);
+            gm.SetPlayerCoin(-priceBasicAttack);
         }            
     }
     public void BuyPoisonDamage()
@@ -49,7 +49,7 @@ public class ShopUIController : MonoBehaviour
         {
             gm.SetPoisonDamage(1);
             pricePoisonAttack += 5;
-            gm.SetLessPlayerCoin(pricePoisonAttack);
+            gm.SetPlayerCoin(-pricePoisonAttack);
         }            
     }
     public void BuySpecialDamage()
@@ -58,7 +58,7 @@ public class ShopUIController : MonoBehaviour
         {
             gm.SetSpecialDamage(1);
             priceSpecialAttack += 5;
-            gm.SetLessPlayerCoin(priceSpecialAttack);
+            gm.SetPlayerCoin(-priceSpecialAttack);
         }            
     }
 }
