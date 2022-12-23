@@ -7,7 +7,6 @@ using UnityEngine.Audio;
 
 public class MenuControll : MonoBehaviour
 {
-
     //Variables    
     [Header("Resolution")]
     [SerializeField] private Dropdown resolutionDropdown;
@@ -26,6 +25,15 @@ public class MenuControll : MonoBehaviour
     [SerializeField] private Slider masterVolume;
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider soundVolume;
+    [SerializeField] private Button soundButton;
+    [SerializeField] private Button musicButton;
+    [SerializeField] private Sprite OnMusic;
+    [SerializeField] private Sprite OffMusic;
+    [SerializeField] private Sprite OnSound;
+    [SerializeField] private Sprite OffSound;
+    private bool sound;
+    private bool music;
+    
 
     private bool update = false;
     /*********************************************************************************************************************************/
@@ -154,7 +162,6 @@ public class MenuControll : MonoBehaviour
     {
         Animator anim = hideImage.GetComponent<Animator>();
         anim.SetBool("Hide", true);
-
         StartCoroutine(HideObject(hideImage));
     }
 
@@ -275,7 +282,40 @@ public class MenuControll : MonoBehaviour
     {
         Time.timeScale = 0;      
         ShowPanel(showImage);
+    }
 
+    public void MuteUnmute(int type)
+    {
+        if (type == 1)
+        {
+            if (music)
+            {
+                music = false;
+                musicVolume.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+                musicButton.image.sprite = OnMusic;
+            }
+            else
+            {
+                music = true;
+                musicVolume.value = -80;
+                musicButton.image.sprite = OffMusic;
+            }
+        }
+        else
+        {
+            if (sound)
+            {
+                sound = false;
+                soundVolume.value = PlayerPrefs.GetFloat("soundVolume", 0.5f);
+                soundButton.image.sprite = OnSound;
+            }
+            else
+            {
+                sound = true;
+                soundVolume.value = -80;
+                soundButton.image.sprite = OffSound;
+            }
+        }
 
     }
     /*********************************************************************************************************************************/
