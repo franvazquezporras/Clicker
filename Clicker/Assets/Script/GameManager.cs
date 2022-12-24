@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isSpecialDamageActive && !coldDown)
+        {
             SetIsSpecialDamageActive();
+            StartCoroutine(ActiveSpecialDamage());
+        }            
     }
     public int GetPlayerCoins() { return playerCoins; }
     public float GetBasicDamage() { return basicDamage; }
@@ -29,16 +32,17 @@ public class GameManager : MonoBehaviour
     public void SetSpecialDamage(float damage) { specialDamage += damage; }
     public void SetPlayerCoin(int coin) { playerCoins += coin; }    
     public void SetenemyKilled() { enemyKilled++; }
-    public void SetIsSpecialDamageActive() { 
-        isSpecialDamageActive = !isSpecialDamageActive;
-        StartCoroutine(ActiveSpecialDamage());
-    }
+    public void SetIsSpecialDamageActive() { isSpecialDamageActive = !isSpecialDamageActive; }
 
     private IEnumerator ActiveSpecialDamage() {
-        coldDown = true;
+        
+        Debug.Log("SpecialON");
         yield return new WaitForSeconds(8);
+        Debug.Log("SpecialOF");
+        coldDown = true;
         SetIsSpecialDamageActive();
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(10);
+        Debug.Log("SpecialUp");
         coldDown = false;
     }
 }

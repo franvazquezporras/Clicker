@@ -13,7 +13,7 @@ public class EnemyControl : MonoBehaviour
         anim = GetComponent<Animator>();
         punch = GetComponent<AudioSource>();
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        enemyLife = (enemyLife*(gm.GetBasicDamage() + gm.GetPoisonDamage() + gm.GetSpecialDamage()))+gm.GetEnemyKilled();
+        enemyLife = (enemyLife*gm.GetBasicDamage() +( gm.GetPoisonDamage() + gm.GetSpecialDamage()))+gm.GetEnemyKilled();
     }
 
     private void Start()

@@ -38,27 +38,27 @@ public class ShopUIController : MonoBehaviour
     {
         if (gm.GetPlayerCoins()- priceBasicAttack >= 0 )
         {
-            gm.SetBasicDamage(1);
-            priceBasicAttack += 5;
+            gm.SetBasicDamage(1);        
             gm.SetPlayerCoin(-priceBasicAttack);
+            priceBasicAttack += 5;
         }            
     }
     public void BuyPoisonDamage()
     {
         if (gm.GetPlayerCoins() - pricePoisonAttack >= 0)
         {
-            gm.SetPoisonDamage(1);
-            pricePoisonAttack += 5;
+            gm.SetPoisonDamage(1);            
             gm.SetPlayerCoin(-pricePoisonAttack);
+            pricePoisonAttack += 5;
         }            
     }
     public void BuySpecialDamage()
     {
         if (gm.GetPlayerCoins()- priceSpecialAttack >= 0)
         {
-            gm.SetSpecialDamage(1);
-            priceSpecialAttack += 5;
+            gm.SetSpecialDamage(1);            
             gm.SetPlayerCoin(-priceSpecialAttack);
+            priceSpecialAttack += 5;
         }            
     }
 }

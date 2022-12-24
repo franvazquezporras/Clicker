@@ -95,6 +95,20 @@ public class MenuControll : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("musicVolume", Mathf.Log10(volume) * 20);        
+        if(musicButton != null)
+        {
+            if (volume <= -0.001)
+            {
+                music = true;
+                musicButton.image.sprite = OffMusic;                
+            }
+            else
+            {
+                music = false;
+                musicButton.image.sprite = OnMusic;
+            }
+                
+        }
     }
 
     /*********************************************************************************************************************************/
@@ -105,7 +119,21 @@ public class MenuControll : MonoBehaviour
     /*********************************************************************************************************************************/
     public void SetSoundVolume(float volume)
     {
-        audioMixer.SetFloat("soundsVolume", Mathf.Log10(volume) * 20);        
+        audioMixer.SetFloat("soundsVolume", Mathf.Log10(volume) * 20);
+        if(soundButton != null)
+        {
+            if (volume <= -0.001)
+            {
+                sound = true;
+                soundButton.image.sprite = OffSound;
+            }
+            else
+            {
+                sound = false;
+                soundButton.image.sprite = OnSound;
+            }
+                
+        }
     }
 
     /*********************************************************************************************************************************/
@@ -290,31 +318,25 @@ public class MenuControll : MonoBehaviour
         {
             if (music)
             {
-                music = false;
-                musicVolume.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-                musicButton.image.sprite = OnMusic;
+                if (PlayerPrefs.GetFloat("musicVolume", 0.5f) <= -0.001f)
+                    PlayerPrefs.SetFloat("musicVolume", 0.5f);
+                SetMusicVolume(PlayerPrefs.GetFloat("musicVolume", 0.5f));
+                LoadOptionsUI();
             }
-            else
-            {
-                music = true;
-                musicVolume.value = -80;
-                musicButton.image.sprite = OffMusic;
-            }
+            else 
+                SetMusicVolume(-0.001f);            
         }
         else
         {
             if (sound)
             {
-                sound = false;
-                soundVolume.value = PlayerPrefs.GetFloat("soundVolume", 0.5f);
-                soundButton.image.sprite = OnSound;
+                if (PlayerPrefs.GetFloat("soundVolume", 0.5f) <= -0.001f)
+                    PlayerPrefs.SetFloat("soundVolume", 0.5f);
+                SetSoundVolume(PlayerPrefs.GetFloat("soundVolume", 0.5f));
+                LoadOptionsUI();
             }
             else
-            {
-                sound = true;
-                soundVolume.value = -80;
-                soundButton.image.sprite = OffSound;
-            }
+                SetSoundVolume(-0.001f);
         }
 
     }
