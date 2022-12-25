@@ -33,6 +33,7 @@ public class EnemyControl : MonoBehaviour
     private void OnDestroy()
     {
         gm.SetenemyKilled();
+        gm.SetPlayerCoin((int)(gm.GetBasicDamage() + gm.GetPoisonDamage() + gm.GetSpecialDamage() + gm.GetEnemyKilled()));
         StopAllCoroutines();        
     }
     public float GetEnemyLife() { return enemyLife; }
