@@ -1391,6 +1391,7 @@ MonoBehaviour:
   - {fileID: 9158930481782244371, guid: 95c4eaf882f56f04ba1a7d3f39bd70f1, type: 3}
   - {fileID: 3579914588966325576, guid: 5e2eeac5ec30d0241a39510ba708bdac, type: 3}
   - {fileID: 3350388372678059423, guid: fce65b82595f43548b1e210314cf7b29, type: 3}
+  - {fileID: 3579914588966325576, guid: e976fb809d0dd7742a7383d694fcea2b, type: 3}
 --- !u!4 &539272806
 Transform:
   m_ObjectHideFlags: 0
@@ -2155,7 +2156,7 @@ GameObject:
   - component: {fileID: 1255389392}
   m_Layer: 0
   m_Name: SoundPunch
-  m_TagString: Untagged
+  m_TagString: audioDeath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2184,7 +2185,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5023622856441308820, guid: a95854d76c4f3814c80bf0dc630e4090, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 188bb362c78a1844bad225987fcc07c7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 444e98deb7e84924188c1bae27217177, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

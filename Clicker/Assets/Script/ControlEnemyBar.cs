@@ -14,7 +14,7 @@ public class ControlEnemyBar : MonoBehaviour
     {
         if(enemy == null)
         {
-            enemy = Instantiate(enemies[Random.Range(0, 3)]);
+            enemy = Instantiate(enemies[Random.Range(0, 4)]);
             maxLife = enemy.GetComponent<EnemyControl>().GetEnemyLife();
         }
         else

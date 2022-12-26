@@ -5,15 +5,18 @@ using UnityEngine;
 public class EnemyControl : MonoBehaviour
 {
     [SerializeField] private Animator anim;
-    [SerializeField] private AudioSource punch;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hit;    
+    [SerializeField] private AudioSource audioDeath;
     private float enemyLife = 10;
     private GameManager gm;
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        punch = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         enemyLife = (enemyLife*gm.GetBasicDamage() +( gm.GetPoisonDamage() + gm.GetSpecialDamage()))+gm.GetEnemyKilled();
+        audioDeath = GameObject.FindGameObjectWithTag("audioDeath").GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -23,15 +26,18 @@ public class EnemyControl : MonoBehaviour
     private void OnMouseDown()
     {
         anim.SetBool("Hit", true);
-        punch.Play();
+        audioSource.clip = hit;
+        audioSource.Play();
         StartCoroutine(StopHit());
         if (gm.GetIsSpecialDamageActive())
             SetEnemyLife(gm.GetBasicDamage() + gm.GetSpecialDamage());
         else
             SetEnemyLife(gm.GetBasicDamage());
+        
     }
     private void OnDestroy()
     {
+        audioDeath.Play();
         gm.SetenemyKilled();
         gm.SetPlayerCoin((int)(gm.GetBasicDamage() + gm.GetPoisonDamage() + gm.GetSpecialDamage() + gm.GetEnemyKilled()));
         StopAllCoroutines();        
