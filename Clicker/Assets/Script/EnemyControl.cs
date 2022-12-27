@@ -8,7 +8,7 @@ public class EnemyControl : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip hit;    
     [SerializeField] private AudioSource audioDeath;
-    private float enemyLife = 10;
+    [SerializeField] private float enemyLife;
     private GameManager gm;
     private void Awake()
     {
