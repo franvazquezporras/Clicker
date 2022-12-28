@@ -28,5 +28,10 @@ public class ControlEnemyBar : MonoBehaviour
         }
 
     }
+
+    public GameObject GetEnemy()
+    {
+        return enemy;
+    }
    
 }

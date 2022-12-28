@@ -37,7 +37,8 @@ public class EnemyControl : MonoBehaviour
     }
     private void OnDestroy()
     {
-        audioDeath.Play();
+        if(audioDeath !=null)
+            audioDeath.Play();
         gm.SetenemyKilled();
         gm.SetPlayerCoin((int)(gm.GetBasicDamage() + gm.GetPoisonDamage() + gm.GetSpecialDamage() + gm.GetEnemyKilled()));
         StopAllCoroutines();        
