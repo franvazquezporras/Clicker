@@ -39,8 +39,11 @@ public class EnemyControl : MonoBehaviour
     {
         if(audioDeath !=null)
             audioDeath.Play();
-        gm.SetenemyKilled();
-        gm.SetPlayerCoin((int)(gm.GetBasicDamage() + gm.GetPoisonDamage() + gm.GetSpecialDamage() + gm.GetEnemyKilled()));
+        if (enemyLife <= 0)
+        {
+            gm.SetenemyKilled();
+            gm.SetPlayerCoin((int)(gm.GetBasicDamage() + gm.GetPoisonDamage() + gm.GetSpecialDamage() + gm.GetEnemyKilled()));          
+        }
         StopAllCoroutines();        
     }
     public float GetEnemyLife() { return enemyLife; }
@@ -53,10 +56,10 @@ public class EnemyControl : MonoBehaviour
     private IEnumerator PoisonDamageGetting()
     {        
         while (enemyLife > 0)
-        {
+        {           
             yield return new WaitForSeconds(1);
             enemyLife -= gm.GetPoisonDamage();            
-        }
+        }        
     }
  
 }

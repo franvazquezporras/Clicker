@@ -5,14 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     
-    private int playerCoins = 100;
-    private float basicDamage = 1;
-    private float poisonDamage = 0;
-    private float specialDamage = 0;
-    private int enemyKilled = 0;
+    private int playerCoins;
+    private float basicDamage;
+    private float poisonDamage;
+    private float specialDamage;
+    private int enemyKilled;
     private bool isSpecialDamageActive;
     private bool coldDown;
 
+    private void Awake()
+    {
+        playerCoins = PlayerPrefs.GetInt("playerCoins");        
+        basicDamage = PlayerPrefs.GetFloat("basicDamage") != 0 ? PlayerPrefs.GetFloat("basicDamage") : 1;
+        poisonDamage = PlayerPrefs.GetFloat("poisonDamage");
+        specialDamage = PlayerPrefs.GetFloat("specialDamage");
+        enemyKilled = PlayerPrefs.GetInt("enemyLevel");
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isSpecialDamageActive && !coldDown)
@@ -27,11 +35,26 @@ public class GameManager : MonoBehaviour
     public float GetSpecialDamage() { return specialDamage; }
     public int GetEnemyKilled() { return enemyKilled; }
     public bool GetIsSpecialDamageActive() { return isSpecialDamageActive; }
-    public void SetBasicDamage(float damage) { basicDamage += damage; }
-    public void SetPoisonDamage(float damage) { poisonDamage += damage; }
-    public void SetSpecialDamage(float damage) { specialDamage += damage; }
-    public void SetPlayerCoin(int coin) { playerCoins += coin; }    
-    public void SetenemyKilled() { enemyKilled++; }
+    public void SetBasicDamage(float damage) { 
+        basicDamage += damage;
+        PlayerPrefs.SetFloat("basicDamage", basicDamage);
+    }
+    public void SetPoisonDamage(float damage) { 
+        poisonDamage += damage;
+        PlayerPrefs.SetFloat("poisonDamage", poisonDamage);
+    }
+    public void SetSpecialDamage(float damage) { 
+        specialDamage += damage;
+        PlayerPrefs.SetFloat("specialDamage", specialDamage);
+    }
+    public void SetPlayerCoin(int coin) { 
+        playerCoins += coin;       
+        PlayerPrefs.SetInt("playerCoins", playerCoins);        
+    }    
+    public void SetenemyKilled() { 
+        enemyKilled++;
+        PlayerPrefs.SetInt("enemyLevel", enemyKilled);
+    }
     public void SetIsSpecialDamageActive() { isSpecialDamageActive = !isSpecialDamageActive; }
 
     private IEnumerator ActiveSpecialDamage() {

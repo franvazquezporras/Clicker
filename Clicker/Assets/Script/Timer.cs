@@ -26,11 +26,16 @@ public class Timer : MonoBehaviour
     {
         Being(duration);
     }
-
+    private void FixedUpdate()
+    {
+        
+    }
     private void Update()
     {
         if (enemysSpawned.GetEnemy() == null)
             SetExtraTime();
+        
+        
     }
     /*********************************************************************************************************************************/
     /*Funcion: Being                                                                                                                 */

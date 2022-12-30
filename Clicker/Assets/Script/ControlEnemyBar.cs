@@ -24,6 +24,7 @@ public class ControlEnemyBar : MonoBehaviour
             if (enemy.GetComponent<EnemyControl>().GetEnemyLife() <= 0)
             {
                 Destroy(enemy);
+                enemy = null;
             }
         }
 
@@ -33,5 +34,6 @@ public class ControlEnemyBar : MonoBehaviour
     {
         return enemy;
     }
+  
    
 }
