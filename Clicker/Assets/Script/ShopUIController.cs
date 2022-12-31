@@ -23,7 +23,7 @@ public class ShopUIController : MonoBehaviour
         priceBasicAttack =5*(int)PlayerPrefs.GetFloat("basicDamage") +5;
         pricePoisonAttack =5* (int)PlayerPrefs.GetFloat("poisonDamage") +5;
         priceSpecialAttack =5* (int)PlayerPrefs.GetFloat("specialDamage")+5;
-        Debug.Log(priceBasicAttack + "    " + pricePoisonAttack + "  " + priceSpecialAttack);
+       
     }
 
     void Update()

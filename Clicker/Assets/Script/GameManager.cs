@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int enemyKilled;
     private bool isSpecialDamageActive;
     private bool coldDown;
+    private int levelReduce;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         poisonDamage = PlayerPrefs.GetFloat("poisonDamage");
         specialDamage = PlayerPrefs.GetFloat("specialDamage");
         enemyKilled = PlayerPrefs.GetInt("enemyLevel");
+        levelReduce = PlayerPrefs.GetInt("levelReduce");
     }
     private void Update()
     {
@@ -35,6 +37,13 @@ public class GameManager : MonoBehaviour
     public float GetSpecialDamage() { return specialDamage; }
     public int GetEnemyKilled() { return enemyKilled; }
     public bool GetIsSpecialDamageActive() { return isSpecialDamageActive; }
+    public int GetLevelReduce() { return levelReduce; }
+
+    public void SetLevelReduce()
+    {
+        levelReduce++;
+        PlayerPrefs.SetInt("levelReduce", levelReduce);
+    }
     public void SetBasicDamage(float damage) { 
         basicDamage += damage;
         PlayerPrefs.SetFloat("basicDamage", basicDamage);
@@ -51,8 +60,8 @@ public class GameManager : MonoBehaviour
         playerCoins += coin;       
         PlayerPrefs.SetInt("playerCoins", playerCoins);        
     }    
-    public void SetenemyKilled() { 
-        enemyKilled++;
+    public void SetenemyKilled(int enemy) { 
+        enemyKilled+= enemy;
         PlayerPrefs.SetInt("enemyLevel", enemyKilled);
     }
     public void SetIsSpecialDamageActive() { isSpecialDamageActive = !isSpecialDamageActive; }

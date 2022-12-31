@@ -26,16 +26,11 @@ public class Timer : MonoBehaviour
     {
         Being(duration);
     }
-    private void FixedUpdate()
-    {
-        
-    }
+  
     private void Update()
     {
         if (enemysSpawned.GetEnemy() == null)
-            SetExtraTime();
-        
-        
+            SetExtraTime();     
     }
     /*********************************************************************************************************************************/
     /*Funcion: Being                                                                                                                 */
@@ -55,7 +50,10 @@ public class Timer : MonoBehaviour
     /*********************************************************************************************************************************/
     private void EndTimer()
     {
-       //PERDER
+        enemysSpawned.GetEnemy().GetComponent<EnemyControl>().GetGM().SetLevelReduce();        
+        enemysSpawned.GetEnemy().GetComponent<EnemyControl>().SetEnemyLife(enemysSpawned.GetEnemy().GetComponent<EnemyControl>().GetEnemyLife(),true);
+        SetExtraTime();
+        StartCoroutine(UpdateTimer());
     }
 
     /*********************************************************************************************************************************/
@@ -65,7 +63,7 @@ public class Timer : MonoBehaviour
     /*********************************************************************************************************************************/
     public void SetExtraTime()
     {
-        remainingDuration = 30;        
+        remainingDuration = 5;        
     }
 
 
