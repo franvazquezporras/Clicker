@@ -17,6 +17,11 @@ public class ShopUIController : MonoBehaviour
     private int priceSpecialAttack = 5;
     private GameManager gm;
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Awake                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */    
+    /*Descripción: Referencias de textos y GameManager                                                                               */
+    /*********************************************************************************************************************************/
     private void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
@@ -26,6 +31,11 @@ public class ShopUIController : MonoBehaviour
        
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Update                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Actualiza los textos de la tienda                                                                                 */
+    /*********************************************************************************************************************************/
     void Update()
     {
         basicAttackText.text = gm.GetBasicDamage().ToString();
@@ -37,7 +47,11 @@ public class ShopUIController : MonoBehaviour
         priceSpecialAttackText.text = "Precio: " + priceSpecialAttack;
     }
 
-
+    /*********************************************************************************************************************************/
+    /*Funcion: BuyBasicDamage                                                                                                        */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Aumenta el daño basico del jugador,resta el precio del dinero del jugador y aumenta el precio del siguiente nivel */
+    /*********************************************************************************************************************************/
     public void BuyBasicDamage()
     {
         if (gm.GetPlayerCoins()- priceBasicAttack >= 0 )
@@ -47,6 +61,13 @@ public class ShopUIController : MonoBehaviour
             priceBasicAttack += 5;
         }            
     }
+
+
+    /*********************************************************************************************************************************/
+    /*Funcion: BuyPoisonDamage                                                                                                       */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Aumenta el daño basico por veneno,resta el precio del dinero del jugador y aumenta el precio del siguiente nivel  */
+    /*********************************************************************************************************************************/
     public void BuyPoisonDamage()
     {
         if (gm.GetPlayerCoins() - pricePoisonAttack >= 0)
@@ -56,6 +77,11 @@ public class ShopUIController : MonoBehaviour
             pricePoisonAttack += 5;
         }            
     }
+    /*********************************************************************************************************************************/
+    /*Funcion: BuySpecialDamage                                                                                                      */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Aumenta el daño basico especial,resta el precio del dinero del jugador y aumenta el precio del siguiente nivel    */
+    /*********************************************************************************************************************************/
     public void BuySpecialDamage()
     {
         if (gm.GetPlayerCoins()- priceSpecialAttack >= 0)

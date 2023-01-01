@@ -312,6 +312,12 @@ public class MenuControll : MonoBehaviour
         ShowPanel(showImage);
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: MuteUnmute                                                                                                            */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: type (comprueba si es el boton de musica o sonido)                                                      */
+    /*Descripción: mutea o desmutea el sonido o la musica del juego                                                                  */
+    /*********************************************************************************************************************************/
     public void MuteUnmute(int type)
     {
         if (type == 1)
