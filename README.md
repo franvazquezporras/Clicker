@@ -28,3 +28,12 @@ I am a fan of role-playing games and I saw that this type of game usually has a 
 
 *Link:*
 https://zetaka.itch.io/clicker
+
+![image](https://github.com/franvazquezporras/Clicker/assets/45006637/b878dd57-785c-453d-90c4-041f83782a85)
+
+![image](https://github.com/franvazquezporras/Clicker/assets/45006637/4368497e-791f-4b2a-9470-a4cc4542d7e4)
+
+![image](https://github.com/franvazquezporras/Clicker/assets/45006637/f4b5da46-dfdd-45b0-add3-7555b8801e78)
+
+![image](https://github.com/franvazquezporras/Clicker/assets/45006637/ddbc5d81-a3f9-4ea6-94a2-a106e7305cf0)
+
